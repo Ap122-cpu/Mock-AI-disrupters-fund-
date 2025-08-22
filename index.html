@@ -164,6 +164,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+  // Data -- abbreviated for readability here, replace with your full data in the same format
   const monthlyPricesData = [
     { date: "2024-01-01", NVDA: 51.99, PLTR: 19.51, AMD: 152.97, MSFT: 361.52, AVGO: 116.18, QQQ: 346.50 },
     { date: "2024-02-01", NVDA: 52.83, PLTR: 19.65, AMD: 160.18, MSFT: 365.66, AVGO: 123.81, QQQ: 342.32 },
@@ -283,7 +284,8 @@
     },
   ];
 
-o  function formatDollar(value) {
+  // Utility: format number as $X,XXX.XX with sign for positive/negative
+  function formatDollar(value) {
     const sign = value > 0 ? '+' : value < 0 ? '-' : '';
     return sign + '$' + Math.abs(value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
@@ -387,7 +389,7 @@ o  function formatDollar(value) {
     QQQ: '#8c564b',
   };
 
-  // Monthly Prices Chart
+  // Monthly Prices Chart - with $ and better spacing
   const monthlyPricesCtx = document.getElementById('monthlyPricesChart').getContext('2d');
   const monthlyPricesChart = new Chart(monthlyPricesCtx, {
     type: 'line',
@@ -438,7 +440,7 @@ o  function formatDollar(value) {
     createDataset(ticker, monthlyReturnsData.map(d => d[ticker]), colors[ticker], 'y')
   );
 
-
+  // Make PLTR, AMD, AVGO datasets initially hidden for less clutter
   allReturnDatasets.forEach(ds => {
     if(['PLTR', 'AMD', 'AVGO'].includes(ds.label)) ds.hidden = true;
   });
