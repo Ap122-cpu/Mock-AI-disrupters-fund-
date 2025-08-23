@@ -114,73 +114,41 @@
     <canvas id="cumulativeChart"></canvas>
   </section>
 
-    
-    <!-- April Rebalance -->
-    <div class="bg-white shadow-lg rounded-2xl p-6 border border-gray-200">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-xl font-semibold">🗓️ April 1, 2024</h3>
-        <span class="text-sm text-gray-500">Q2 Adjustment</span>
-      </div>
-      <div class="grid grid-cols-2 gap-4 text-sm sm:text-base">
-        <div>
-          <p class="font-medium text-gray-600 mb-1">Before</p>
-          <p>NVDA 30%<br>PLTR 15%<br>AMD 25%<br>MSFT 10%<br>AVGO 10%<br>QQQ 10%</p>
-        </div>
-        <div>
-          <p class="font-medium text-gray-600 mb-1">After</p>
-          <p>NVDA 28%<br>PLTR 17%<br>AMD 23%<br>MSFT 12%<br>AVGO 10%<br>QQQ 10%</p>
-        </div>
-      </div>
-      <p class="mt-4 text-gray-700 text-sm sm:text-base">
-        🔁 Trimmed NVDA slightly to lock in gains and raised PLTR due to rising AI demand.
-      </p>
-    </div>
-
-    <!-- July Rebalance -->
-    <div class="bg-white shadow-lg rounded-2xl p-6 border border-gray-200">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-xl font-semibold">🗓️ July 1, 2024</h3>
-        <span class="text-sm text-gray-500">Mid-Year Update</span>
-      </div>
-      <div class="grid grid-cols-2 gap-4 text-sm sm:text-base">
-        <div>
-          <p class="font-medium text-gray-600 mb-1">Before</p>
-          <p>NVDA 28%<br>PLTR 17%<br>AMD 23%<br>MSFT 12%<br>AVGO 10%<br>QQQ 10%</p>
-        </div>
-        <div>
-          <p class="font-medium text-gray-600 mb-1">After</p>
-          <p>NVDA 30%<br>PLTR 15%<br>AMD 20%<br>MSFT 15%<br>AVGO 10%<br>QQQ 10%</p>
-        </div>
-      </div>
-      <p class="mt-4 text-gray-700 text-sm sm:text-base">
-        🧠 Increased MSFT due to enterprise AI adoption; slightly reduced PLTR and AMD.
-      </p>
-    </div>
-
-    <!-- August Rebalance -->
-    <div class="bg-white shadow-lg rounded-2xl p-6 border border-gray-200">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-xl font-semibold">🗓️ August 1, 2024</h3>
-        <span class="text-sm text-gray-500">Q3 Shift</span>
-      </div>
-      <div class="grid grid-cols-2 gap-4 text-sm sm:text-base">
-        <div>
-          <p class="font-medium text-gray-600 mb-1">Before</p>
-          <p>NVDA 30%<br>PLTR 15%<br>AMD 20%<br>MSFT 15%<br>AVGO 10%<br>QQQ 10%</p>
-        </div>
-        <div>
-          <p class="font-medium text-gray-600 mb-1">After</p>
-          <p>NVDA 32%<br>PLTR 13%<br>AMD 18%<br>MSFT 15%<br>AVGO 12%<br>QQQ 10%</p>
-        </div>
-      </div>
-      <p class="mt-4 text-gray-700 text-sm sm:text-base">
-        💹 Increased NVDA and AVGO following strong earnings; lowered PLTR and AMD slightly.
-      </p>
-    </div>
-
+<section id="rebalancing" class="mb-12">
+  <h2 class="text-2xl font-semibold mb-4">📈 Rebalancing Log</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full border text-left text-lg">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 border">Date</th>
+          <th class="px-4 py-2 border">Pre-Rebalance Holdings</th>
+          <th class="px-4 py-2 border">Post-Rebalance Holdings</th>
+          <th class="px-4 py-2 border">Reason</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white">
+        <tr>
+          <td class="px-4 py-2 border">2024-04-01</td>
+          <td class="px-4 py-2 border">NVDA 30%, PLTR 15%, AMD 25%, MSFT 10%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">Slight increase in PLTR due to strong AI demand; trimmed NVDA for risk control</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border">2024-07-01</td>
+          <td class="px-4 py-2 border">NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">Shifted weight to MSFT due to growing enterprise AI integrations</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border">2024-08-01</td>
+          <td class="px-4 py-2 border">NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</td>
+          <td class="px-4 py-2 border">Increased NVDA and AVGO due to quarterly earnings strength</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>
-
 
 </main>
 
