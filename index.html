@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,20 +116,42 @@
     <canvas id="cumulativeChart"></canvas>
   </section>
 
-  <section id="rebalancing" class="tab-content" role="tabpanel" hidden>
-    <table>
-      <thead>
+ <section id="rebalancing" class="mb-12">
+  <h2 class="text-2xl font-semibold mb-4">📈 Rebalancing Log</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full border text-left text-lg">
+      <thead class="bg-gray-100">
         <tr>
-          <th>Date</th>
-          <th>Pre-Rebalance Value</th>
-          <th>New Weights</th>
-          <th>Rationale</th>
-          <th>Post-Rebalance Value</th>
+          <th class="px-4 py-2 border">Date</th>
+          <th class="px-4 py-2 border">Pre-Rebalance Holdings</th>
+          <th class="px-4 py-2 border">Post-Rebalance Holdings</th>
+          <th class="px-4 py-2 border">Reason</th>
         </tr>
       </thead>
-      <tbody id="rebalancingTableBody"></tbody>
+      <tbody class="bg-white">
+        <tr>
+          <td class="px-4 py-2 border">2024-04-01</td>
+          <td class="px-4 py-2 border">NVDA 30%, PLTR 15%, AMD 25%, MSFT 10%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">Slight increase in PLTR due to strong AI demand; trimmed NVDA for risk control</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border">2024-07-01</td>
+          <td class="px-4 py-2 border">NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">Shifted weight to MSFT due to growing enterprise AI integrations</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-2 border">2024-08-01</td>
+          <td class="px-4 py-2 border">NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+          <td class="px-4 py-2 border">NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</td>
+          <td class="px-4 py-2 border">Increased NVDA and AVGO due to quarterly earnings strength</td>
+        </tr>
+      </tbody>
     </table>
-  </section>
+  </div>
+</section>
+
 </main>
 
 <script>
