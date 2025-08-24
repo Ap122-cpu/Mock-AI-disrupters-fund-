@@ -114,114 +114,57 @@
   </section>
 
 <section id="rebalancing" class="tab-content" role="tabpanel" hidden>
-  <h2>Rebalancing Log</h2>
+  <h2 style="color: #0a3d62; font-weight: 600; margin-bottom: 1rem;">Rebalancing Log</h2>
 
-  <table id="rebalancingTable">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Before Weights</th>
-        <th>After Weights</th>
-        <th>Rationale</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>April 1, 2024</td>
-        <td>NVDA 30%, PLTR 15%, AMD 25%, MSFT 10%, AVGO 10%, QQQ 10%</td>
-        <td>NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
-        <td>Trimmed NVDA; increased PLTR</td>
-      </tr>
-      <tr>
-        <td>July 1, 2024</td>
-        <td>NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
-        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
-        <td>Boosted MSFT; trimmed PLTR & AMD</td>
-      </tr>
-      <tr>
-        <td>August 1, 2024</td>
-        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
-        <td>NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</td>
-        <td>Increased NVDA & AVGO; lowered PLTR & AMD</td>
-      </tr>
-      <tr>
-        <td>January 1, 2025</td>
-        <td>NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</td>
-        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
-        <td>Rebalanced to target weights</td>
-      </tr>
-      <tr>
-        <td>April 1, 2025</td>
-        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
-        <td>NVDA 28%, PLTR 17%, AMD 22%, MSFT 13%, AVGO 10%, QQQ 10%</td>
-        <td>Adjusted based on earnings & trends</td>
-      </tr>
-    </tbody>
-  </table>
+  <div style="background: white; border-radius: 12px; padding: 1.5rem 2rem; box-shadow: 0 0 15px rgba(10, 61, 98, 0.1); max-width: 700px;">
+    
+    <div style="margin-bottom: 1.5rem;">
+      <h3 style="color: #4e79a7; font-weight: 600; margin-bottom: 0.25rem;">April 1, 2024 — Q2 Adjustment</h3>
+      <ul style="margin: 0; padding-left: 1.2rem; color: #1a202c; font-weight: 500;">
+        <li><strong>Before:</strong> NVDA 30%, PLTR 15%, AMD 25%, MSFT 10%, AVGO 10%, QQQ 10%</li>
+        <li><strong>After:</strong> NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</li>
+        <li>Trimmed NVDA to lock in gains, increased PLTR on AI optimism.</li>
+      </ul>
+    </div>
 
-  <h3 style="margin-top: 2rem;">Latest Allocation Breakdown (April 1, 2025)</h3>
-  <canvas id="rebalancingChart" style="max-width:600px; height:300px;"></canvas>
+    <div style="margin-bottom: 1.5rem;">
+      <h3 style="color: #f28e2b; font-weight: 600; margin-bottom: 0.25rem;">July 1, 2024 — Mid-Year Update</h3>
+      <ul style="margin: 0; padding-left: 1.2rem; color: #1a202c; font-weight: 500;">
+        <li><strong>Before:</strong> NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</li>
+        <li><strong>After:</strong> NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</li>
+        <li>Boosted MSFT due to AI adoption, trimmed PLTR and AMD slightly.</li>
+      </ul>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <h3 style="color: #e15759; font-weight: 600; margin-bottom: 0.25rem;">August 1, 2024 — Q3 Shift</h3>
+      <ul style="margin: 0; padding-left: 1.2rem; color: #1a202c; font-weight: 500;">
+        <li><strong>Before:</strong> NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</li>
+        <li><strong>After:</strong> NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</li>
+        <li>Increased NVDA and AVGO post-earnings; lowered PLTR and AMD for balance.</li>
+      </ul>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <h3 style="color: #76b7b2; font-weight: 600; margin-bottom: 0.25rem;">January 1, 2025 — Annual Rebalance</h3>
+      <ul style="margin: 0; padding-left: 1.2rem; color: #1a202c; font-weight: 500;">
+        <li><strong>Before:</strong> NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</li>
+        <li><strong>After:</strong> NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</li>
+        <li>Rebalanced to target weights for stability.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 style="color: #59a14f; font-weight: 600; margin-bottom: 0.25rem;">April 1, 2025 — Q2 Adjustment</h3>
+      <ul style="margin: 0; padding-left: 1.2rem; color: #1a202c; font-weight: 500;">
+        <li><strong>Before:</strong> NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</li>
+        <li><strong>After:</strong> NVDA 28%, PLTR 17%, AMD 22%, MSFT 13%, AVGO 10%, QQQ 10%</li>
+        <li>Adjusted based on earnings & sector trends.</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-<script>
-  // Colors consistent with the fund's palette
-  const colors = {
-    NVDA: '#4e79a7',
-    PLTR: '#f28e2b',
-    AMD: '#e15759',
-    MSFT: '#76b7b2',
-    AVGO: '#59a14f',
-    QQQ: '#edc949'
-  };
-
-  // Data for April 1, 2025 rebalance after weights
-  const latestRebalanceLabels = ['NVDA', 'PLTR', 'AMD', 'MSFT', 'AVGO', 'QQQ'];
-  const latestRebalanceData = [28, 17, 22, 13, 10, 10];
-
-  // Create the bar chart
-  const ctx = document.getElementById('rebalancingChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: latestRebalanceLabels,
-      datasets: [{
-        label: 'Weight %',
-        data: latestRebalanceData,
-        backgroundColor: latestRebalanceLabels.map(stock => colors[stock]),
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: '#ccc'
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => `${ctx.parsed.y}%`
-          }
-        },
-        title: {
-          display: false
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 40,
-          ticks: { stepSize: 5, callback: val => val + '%' },
-          grid: { color: '#eee' }
-        },
-        x: {
-          grid: { display: false }
-        }
-      }
-    }
-  });
-</script>
-
-</section>
 
 </main>
 
