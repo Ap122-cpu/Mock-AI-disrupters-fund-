@@ -113,20 +113,116 @@
     <canvas id="cumulativeChart"></canvas>
   </section>
 
-  <section id="rebalancing" class="tab-content" role="tabpanel" hidden>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Pre-Rebalance Value</th>
-          <th>New Weights</th>
-          <th>Rationale</th>
-          <th>Post-Rebalance Value</th>
-        </tr>
-      </thead>
-      <tbody id="rebalancingTableBody"></tbody>
-    </table>
-  </section>
+<section id="rebalancing" class="tab-content" role="tabpanel" hidden>
+  <h2>Rebalancing Log</h2>
+
+  <table id="rebalancingTable">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Before Weights</th>
+        <th>After Weights</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>April 1, 2024</td>
+        <td>NVDA 30%, PLTR 15%, AMD 25%, MSFT 10%, AVGO 10%, QQQ 10%</td>
+        <td>NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
+        <td>Trimmed NVDA; increased PLTR</td>
+      </tr>
+      <tr>
+        <td>July 1, 2024</td>
+        <td>NVDA 28%, PLTR 17%, AMD 23%, MSFT 12%, AVGO 10%, QQQ 10%</td>
+        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+        <td>Boosted MSFT; trimmed PLTR & AMD</td>
+      </tr>
+      <tr>
+        <td>August 1, 2024</td>
+        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+        <td>NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</td>
+        <td>Increased NVDA & AVGO; lowered PLTR & AMD</td>
+      </tr>
+      <tr>
+        <td>January 1, 2025</td>
+        <td>NVDA 32%, PLTR 13%, AMD 18%, MSFT 15%, AVGO 12%, QQQ 10%</td>
+        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+        <td>Rebalanced to target weights</td>
+      </tr>
+      <tr>
+        <td>April 1, 2025</td>
+        <td>NVDA 30%, PLTR 15%, AMD 20%, MSFT 15%, AVGO 10%, QQQ 10%</td>
+        <td>NVDA 28%, PLTR 17%, AMD 22%, MSFT 13%, AVGO 10%, QQQ 10%</td>
+        <td>Adjusted based on earnings & trends</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 2rem;">Latest Allocation Breakdown (April 1, 2025)</h3>
+  <canvas id="rebalancingChart" style="max-width:600px; height:300px;"></canvas>
+</section>
+
+<script>
+  // Colors consistent with the fund's palette
+  const colors = {
+    NVDA: '#4e79a7',
+    PLTR: '#f28e2b',
+    AMD: '#e15759',
+    MSFT: '#76b7b2',
+    AVGO: '#59a14f',
+    QQQ: '#edc949'
+  };
+
+  // Data for April 1, 2025 rebalance after weights
+  const latestRebalanceLabels = ['NVDA', 'PLTR', 'AMD', 'MSFT', 'AVGO', 'QQQ'];
+  const latestRebalanceData = [28, 17, 22, 13, 10, 10];
+
+  // Create the bar chart
+  const ctx = document.getElementById('rebalancingChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: latestRebalanceLabels,
+      datasets: [{
+        label: 'Weight %',
+        data: latestRebalanceData,
+        backgroundColor: latestRebalanceLabels.map(stock => colors[stock]),
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#ccc'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.parsed.y}%`
+          }
+        },
+        title: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 40,
+          ticks: { stepSize: 5, callback: val => val + '%' },
+          grid: { color: '#eee' }
+        },
+        x: {
+          grid: { display: false }
+        }
+      }
+    }
+  });
+</script>
+
+</section>
+
 </main>
 
 <script>
