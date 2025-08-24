@@ -114,7 +114,210 @@
     <canvas id="cumulativeChart"></canvas>
   </section>
 
-</section>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Disruptors Fund Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #222;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background: #ddd;
+    }
+    .tabs button {
+      padding: 1rem 2rem;
+      border: none;
+      background: #ddd;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    .tabs button:hover,
+    .tabs button.active {
+      background: #bbb;
+    }
+    .tab-content {
+      display: none;
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      font-size: 1.15rem;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+      margin-top: 0;
+    }
+    .rebalance-entry {
+      margin-bottom: 2rem;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .rebalance-entry h3 {
+      margin-top: 0;
+      font-size: 1.4rem;
+    }
+    .rebalance-section {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+    .rebalance-section div {
+      width: 45%;
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .rebalance-notes {
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>AI Disruptors Fund Dashboard</header>
+  <div class="tabs">
+    <button class="active" onclick="showTab('overview')">Overview</button>
+    <button onclick="showTab('holdings')">Holdings</button>
+    <button onclick="showTab('performance')">Performance</button>
+    <button onclick="showTab('rebalancing')">Rebalancing Log</button>
+  </div>
+
+  <section id="overview" class="tab-content active">
+    <h2>Fund Overview</h2>
+    <p>Started in early 2024, the AI Disruptors Fund tracks major innovators in artificial intelligence.</p>
+  </section>
+
+  <section id="holdings" class="tab-content">
+    <h2>Holdings</h2>
+    <ul>
+      <li>NVDA - NVIDIA</li>
+      <li>PLTR - Palantir</li>
+      <li>AMD - Advanced Micro Devices</li>
+      <li>MSFT - Microsoft</li>
+      <li>AVGO - Broadcom</li>
+      <li>QQQ - Invesco QQQ Trust</li>
+    </ul>
+  </section>
+
+  <section id="performance" class="tab-content">
+    <h2>Performance</h2>
+    <p>📈 Monthly and cumulative return charts coming soon.</p>
+  </section>
+
+  <section id="rebalancing" class="tab-content">
+    <h2>📊 Rebalancing Log</h2>
+
+    <div class="rebalance-entry">
+      <h3>🗓️ April 1, 2024 – Q2 Adjustment</h3>
+      <div class="rebalance-section">
+        <div>
+          <strong>Before</strong><br />
+          NVDA 30%<br />
+          PLTR 15%<br />
+          AMD 25%<br />
+          MSFT 10%<br />
+          AVGO 10%<br />
+          QQQ 10%
+        </div>
+        <div>
+          <strong>After</strong><br />
+          NVDA 28%<br />
+          PLTR 17%<br />
+          AMD 23%<br />
+          MSFT 12%<br />
+          AVGO 10%<br />
+          QQQ 10%
+        </div>
+      </div>
+      <div class="rebalance-notes">🔁 Trimmed NVDA slightly to lock in gains and raised PLTR due to rising AI demand.</div>
+    </div>
+
+    <div class="rebalance-entry">
+      <h3>🗓️ July 1, 2024 – Mid-Year Update</h3>
+      <div class="rebalance-section">
+        <div>
+          <strong>Before</strong><br />
+          NVDA 28%<br />
+          PLTR 17%<br />
+          AMD 23%<br />
+          MSFT 12%<br />
+          AVGO 10%<br />
+          QQQ 10%
+        </div>
+        <div>
+          <strong>After</strong><br />
+          NVDA 30%<br />
+          PLTR 15%<br />
+          AMD 20%<br />
+          MSFT 15%<br />
+          AVGO 10%<br />
+          QQQ 10%
+        </div>
+      </div>
+      <div class="rebalance-notes">🧠 Increased MSFT due to enterprise AI adoption; slightly reduced PLTR and AMD.</div>
+    </div>
+
+    <div class="rebalance-entry">
+      <h3>🗓️ August 1, 2024 – Q3 Shift</h3>
+      <div class="rebalance-section">
+        <div>
+          <strong>Before</strong><br />
+          NVDA 30%<br />
+          PLTR 15%<br />
+          AMD 20%<br />
+          MSFT 15%<br />
+          AVGO 10%<br />
+          QQQ 10%
+        </div>
+        <div>
+          <strong>After</strong><br />
+          NVDA 32%<br />
+          PLTR 13%<br />
+          AMD 18%<br />
+          MSFT 15%<br />
+          AVGO 12%<br />
+          QQQ 10%
+        </div>
+      </div>
+      <div class="rebalance-notes">💹 Increased NVDA and AVGO following strong earnings; lowered PLTR and AMD.</div>
+    </div>
+  </section>
+
+  <script>
+    function showTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tabs button');
+      contents.forEach(c => c.classList.remove('active'));
+      buttons.forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
+
+    </table>
+  </section>
 </main>
 
 <script>
