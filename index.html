@@ -1,339 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Disruptors Fund Tracker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: #f7f9fc;
-      color: #1a202c;
-    }
-    header {
-      background-color: #0a3d62;
-      color: white;
-      padding: 1rem 2rem;
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.75rem;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Disrupter Fund Tracker</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  /* Reset & base */
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0; background: #f7f9fc; color: #1a202c;
+  }
+  header {
+    background-color: #0a3d62;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.75rem;
+    letter-spacing: 0.05em;
+  }
+  main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: white;
+    border: 2px solid #0a3d62;
+    color: #0a3d62;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: #0a3d62;
+    color: white;
+  }
+  /* Chart containers */
+  .tab-content {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem 2rem 2rem 2rem;
+    box-shadow: 0 0 15px rgba(10, 61, 98, 0.1);
+  }
+  canvas {
+    max-width: 100%;
+    height: 350px !important;
+  }
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  th {
+    background: #0a3d62;
+    color: white;
+    position: sticky;
+    top: 0;
+  }
+  tbody tr:hover {
+    background-color: #f0f5ff;
+  }
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
     .tabs {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 1rem 0;
+      flex-direction: column;
     }
     .tab-btn {
-      background: white;
-      border: 2px solid #0a3d62;
-      color: #0a3d62;
-      padding: 0.5rem 1.2rem;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      background: #0a3d62;
-      color: white;
-    }
-    .tab-content {
-      display: none;
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      max-width: 1100px;
-      margin: auto;
-      box-shadow: 0 0 15px rgba(10, 61, 98, 0.1);
-    }
-    .tab-content.active {
-      display: block;
-    }
-    canvas {
       width: 100%;
-      height: 400px;
+      text-align: center;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    th, td {
-      text-align: left;
-      padding: 0.6rem 0.8rem;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    th {
-      background: #0a3d62;
-      color: white;
-    }
-    tbody tr:hover {
-      background-color: #f0f5ff;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>AI Disruptors Fund Tracker</header>
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="overview">Overview</button>
-    <button class="tab-btn" data-tab="prices">Monthly Prices</button>
-    <button class="tab-btn" data-tab="returns">Monthly Returns</button>
-    <button class="tab-btn" data-tab="cumulative">Cumulative Returns</button>
-    <button class="tab-btn" data-tab="rebalancing">Rebalancing Log</button>
+<header>AI Disrupter Fund Tracker</header>
+<main>
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="prices">Monthly Prices</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="returns">Monthly Returns</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="cumulative">Cumulative Returns</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="rebalancing">Rebalancing Log</button>
   </nav>
 
-  <section id="overview" class="tab-content active">
-    <h2>Fund Overview</h2>
-    <p>The AI Disruptors Fund tracks major innovators in artificial intelligence, started in early 2024.</p>
-  </section>
-
-  <section id="prices" class="tab-content">
+  <section id="prices" class="tab-content" role="tabpanel">
     <canvas id="pricesChart"></canvas>
   </section>
 
-  <section id="returns" class="tab-content">
+  <section id="returns" class="tab-content" role="tabpanel" hidden>
     <canvas id="returnsChart"></canvas>
   </section>
 
-  <section id="cumulative" class="tab-content">
+  <section id="cumulative" class="tab-content" role="tabpanel" hidden>
     <canvas id="cumulativeChart"></canvas>
   </section>
 
-  <section id="rebalancing" class="tab-content">
-    <h2>Rebalancing Log</h2>
+  <section id="rebalancing" class="tab-content" role="tabpanel" hidden>
     <table>
       <thead>
         <tr>
           <th>Date</th>
-          <th>Pre Value</th>
-          <th>Weights</th>
+          <th>Pre-Rebalance Value</th>
+          <th>New Weights</th>
           <th>Rationale</th>
-          <th>Post Value</th>
+          <th>Post-Rebalance Value</th>
         </tr>
       </thead>
       <tbody id="rebalancingTableBody"></tbody>
     </table>
   </section>
+</main>
 
-  <script>
-    const tabs = document.querySelectorAll('.tab-btn');
-    const contents = document.querySelectorAll('.tab-content');
+<script>
+  // Data parsed from your datasets:
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        contents.forEach(c => c.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
-      });
-    });
+  const dates = [
+    "2024-01-01","2024-02-01","2024-03-01","2024-04-01","2024-05-01","2024-06-01","2024-07-01",
+    "2024-08-01","2024-09-01","2024-10-01","2024-11-01","2024-12-01","2025-01-01","2025-02-01",
+    "2025-03-01","2025-04-01","2025-05-01","2025-06-01","2025-07-01","2025-08-01"
+  ];
 
-    // PLACEHOLDER: Hook up Chart.js here (pricesChart, returnsChart, cumulativeChart)
-    // PLACEHOLDER: Insert your real JS dataset code
+  const prices = {
+    NVDA: [51.98617865,52.82698074,57.83333316,68.37652246,68.82675878,69.28007276,82.29927282,91.08418302,89.54053942,97.0848675,95.498329,93.91563754,99.00551077,83.03314731,71.20160608,69.33407674,64.39172798,68.3469727,64.19131221,57.05128879],
+    PLTR: [19.50744566,19.65223714,20.37451228,18.08289271,17.64097805,18.36588569,16.80296061,17.93833333,17.39903763,17.4134897,16.8881132,20.52290497,21.11089189,19.51129654,21.7015272,19.70315585,20.70577772,17.26930166,15.49369615,16.26351785],
+    AMD: [152.9710699,160.1816409,163.134617,163.1166119,143.8929605,137.8516978,135.6372651,154.0448998,163.9595113,139.9715764,148.7069781,147.4417453,141.8843415,154.8196005,175.4260819,197.0259466,186.4019623,186.2302418,197.986276,223.2403189],
+    MSFT: [361.524238,365.6579431,336.1736643,306.0455578,340.0939164,396.4216322,405.4596442,458.3126426,488.6362582,471.7724556,502.9752785,595.4239739,611.1535248,725.1118791,556.904406,619.3836508,643.3567134,643.4205761,668.6272706,555.7918109],
+    AVGO: [116.1757815,123.8098381,145.8219155,142.6390574,135.3859526,132.6544456,148.777295,158.131684,154.4984472,167.0633027,173.6970114,195.7329958,187.8634901,187.3438194,185.6182301,164.0212715,173.7989121,183.5499917,189.1503489,190.3876356],
+    QQQ: [346.5005411,342.3201741,340.85797,323.737449,328.22815,351.337081,428.1458983,448.4647527,473.4689225,484.1482074,405.7756892,416.8730913,431.8901194,551.231816,557.1652221,590.6813479,606.3514289,553.6790119,633.565083,700.2118869]
+  };
 
-    const rebalancingLog = [
-      {date: "2024-01-01", preValue: "10000", weights: "{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}", rationale: "Initial allocation", postValue: "10000"},
-      {date: "2024-04-01", preValue: "10500", weights: "{'NVDA': 0.25, 'PLTR': 0.15, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}", rationale: "Raised NVDA due to growth", postValue: "10700"},
-    ];
+  const monthlyReturns = {
+    NVDA: [0.01617356988,0.09476885381,0.1823029856,0.006584662528,0.006586304305,0.1879212816,0.1067434729,-0.01694743859,0.08425600436,-0.01634176928,-0.01657297536,0.05419622716,-0.1613280245,-0.1424917833,-0.02622875292,-0.07128311203,0.06142473326,-0.06080240755,-0.1112303701],
+    PLTR: [0.007422369951,0.03675282047,-0.1124748186,-0.02443827245,0.04109225897,-0.08509935774,0.06756980183,-0.03006386899,0.0008306250207,-0.03017066122,0.2152278185,0.02865027753,-0.0757710929,0.1122544912,-0.092084365,0.0508863595,-0.1659670124,-0.1028186049,0.04968612359],
+    AMD: [0.04713682812,0.01843517176,-0.0001103695589,-0.117852199,-0.04198442084,-0.0160638771,0.1357122226,0.06436182896,-0.1463040155,0.06240839694,-0.008508228042,-0.03769220003,0.09116762888,0.1330999522,0.1231280119,-0.05392175232,-0.0009212375851,0.06312634314,0.1275545127],
+    MSFT: [0.01143410233,-0.0806334974,-0.08962066241,0.1112525822,0.1656240029,0.02279898784,0.1303532898,0.0661636025,-0.03451197546,0.06613956055,0.1838036566,0.02641739609,0.1864643656,-0.2319745104,0.1121902504,0.03870470682,0.00009926495341,0.03917607765,-0.1687568915],
+    AVGO: [0.06571125715,-0.02182702183,-0.02182702183,-0.05084936029,-0.02017570436,0.1215402118,0.06287511097,-0.02297602038,0.08132674331,0.03970775493,0.1268644991,-0.04020530939,-0.00276621466,-0.009210815313,-0.1163514948,0.05961202771,0.05610552722,0.03051134566,0.006541286662],
+    QQQ: [-0.01206453228,-0.004271451653,-0.05022772692,0.01387142883,0.07040508568,0.2186185901,0.04745778128,0.05575503907,0.02255540842,-0.1618771215,0.02734861246,0.03602302099,0.2763242112,0.01076390352,0.06015473423,0.02652882303,-0.08686780376,0.1442822815,0.1051933033]
+  };
 
-    function populateRebalancingTable() {
-      const tbody = document.getElementById('rebalancingTableBody');
-      tbody.innerHTML = '';
-      rebalancingLog.forEach(entry => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${new Date(entry.date).toLocaleDateString()}</td>
-          <td>$${Number(entry.preValue).toLocaleString()}</td>
-          <td><code>${entry.weights.replace(/'/g, '"')}</code></td>
-          <td>${entry.rationale}</td>
-          <td>$${Number(entry.postValue).toLocaleString()}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
+  const cumulativeReturns = {
+    NVDA: [1.01617357,1.112475174,1.31528272,1.323943413,1.332663307,1.583099104,1.7520846,1.722391254,1.867513059,1.836994591,1.806550125,1.904458326,1.597215827,1.369625695,1.333702121,1.238631684,1.314714304,1.234776509,1.097431861],
+    PLTR: [1.00742237,1.044447983,0.926973886,0.9043202456,0.9414808073,0.8613613953,0.9195634141,0.89191778,0.8926586293,0.8657265282,1.05205496,1.082196627,1.000197406,1.112474057,1.010032589,1.061429471,0.8852671928,0.7942452551,0.833708223],
+    AMD: [1.047136828,1.066440975,1.066323273,0.9406547302,0.9011618861,0.8866857324,1.007019824,1.071833462,0.9150199221,0.9721248486,0.9638537887,0.9275240189,1.012084184,1.146792541,1.287994827,1.218543889,1.21742132,1.294272676,1.459362997],
+    MSFT: [1.011434102,0.9298786333,0.8465422942,0.9407223104,1.096528505,1.121528245,1.267723141,1.351600271,1.304953876,1.391262952,1.64698217,1.69049115,2.00570751,1.540434492,1.713256224,1.779567304,1.779743952,1.84946734,1.537356981],
+    AVGO: [1.065711257,1.255183427,1.227786511,1.165354352,1.141842507,1.280622287,1.361141556,1.32986794,1.438021768,1.495122384,1.684800337,1.617062418,1.612589276,1.597736014,1.411837041,1.495999509,1.57993335,1.628139243,1.638789369],
+    QQQ: [0.9879354677,0.9837155491,0.9343057532,0.9472659089,1.013958246,1.235628369,1.29426855,1.366430543,1.397250942,1.171067982,1.203095066,1.246434185,1.590854128,1.607977928,1.704705413,1.749929241,1.597916731,1.828467803,2.020810371]
+  };
 
-    window.onload = populateRebalancingTable;
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Disruptors Fund</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #111;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #222;
-    }
-    nav button {
-      background: none;
-      border: none;
-      color: white;
-      padding: 14px 20px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    nav button:hover, nav button.active {
-      background-color: #444;
-    }
-    section {
-      display: none;
-      padding: 20px;
-    }
-    section.active {
-      display: block;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    table th, table td {
-      padding: 10px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-    h2 {
-      margin-top: 0;
-    }
-    canvas {
-      max-width: 100%;
-      height: auto;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>AI Disruptors Fund</h1>
-    <p>Tracking innovation-driven performance since Jan 2024</p>
-  </header>
+  const rebalancingLog = [
+    {date:"2024-01-01",preValue:"10000",weights:"{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}",rationale:"Equal-weight rebalancing every quarter",postValue:"10000"},
+    {date:"2024-04-01",preValue:"10000",weights:"{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}",rationale:"Equal-weight rebalancing every quarter",postValue:"10000"},
+    {date:"2024-07-01",preValue:"10000",weights:"{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}",rationale:"Equal-weight rebalancing every quarter",postValue:"10000"},
+    {date:"2024-10-01",preValue:"10000",weights:"{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}",rationale:"Equal-weight rebalancing every quarter",postValue:"10000"},
+    {date:"2025-01-01",preValue:"10000",weights:"{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}",rationale:"Equal-weight rebalancing every quarter",postValue:"10000"},
+    {date:"2025-04-01",preValue:"10000",weights:"{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}",rationale:"Equal-weight rebalancing every quarter",postValue:"10000"},
+    {date:"2025-07-01",preValue:"10000",weights:"{'NVDA': 0.2, 'PLTR': 0.2, 'AMD': 0.2, 'MSFT': 0.2, 'AVGO': 0.2}",rationale:"Equal-weight rebalancing every quarter",postValue:"10000"},
+  ];
 
-  <nav>
-    <button class="tab-btn active" data-tab="performance">Performance</button>
-    <button class="tab-btn" data-tab="rebalancing">Rebalancing Log</button>
-    <button class="tab-btn" data-tab="about">About the Fund</button>
-  </nav>
+  // Utility for colors - distinct for each stock
+  const colors = {
+    NVDA: '#4e79a7',
+    PLTR: '#f28e2b',
+    AMD: '#e15759',
+    MSFT: '#76b7b2',
+    AVGO: '#59a14f',
+    QQQ: '#edc949'
+  };
 
-  <section id="performance" class="active">
-    <h2>Fund Performance Overview</h2>
-    <canvas id="performanceChart"></canvas>
-  </section>
+  // Create Chart.js datasets from data
+  function createDatasets(dataObj) {
+    return Object.keys(dataObj).map(stock => ({
+      label: stock,
+      data: dataObj[stock],
+      borderColor: colors[stock],
+      backgroundColor: colors[stock],
+      fill: false,
+      tension: 0.15,
+      pointRadius: 3,
+      pointHoverRadius: 6,
+      borderWidth: 2
+    }));
+  }
 
-  <section id="rebalancing">
-    <h2>Rebalancing Log</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>NVDA</th>
-          <th>PLTR</th>
-          <th>AMD</th>
-          <th>MSFT</th>
-          <th>AVGO</th>
-          <th>QQQ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2024-01-01</td>
-          <td>20%</td>
-          <td>15%</td>
-          <td>15%</td>
-          <td>20%</td>
-          <td>15%</td>
-          <td>15%</td>
-        </tr>
-        <tr>
-          <td>2024-02-01</td>
-          <td>21%</td>
-          <td>14%</td>
-          <td>14%</td>
-          <td>21%</td>
-          <td>15%</td>
-          <td>15%</td>
-        </tr>
-        <tr>
-          <td>2024-03-01</td>
-          <td>22%</td>
-          <td>14%</td>
-          <td>13%</td>
-          <td>21%</td>
-          <td>15%</td>
-          <td>15%</td>
-        </tr>
-        <!-- Add more rows as needed -->
-      </tbody>
-    </table>
-  </section>
+  // Format date labels for display (e.g. Jan 2024)
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString(undefined, {year:'numeric', month:'short'});
+  }
 
-  <section id="about">
-    <h2>About the Fund</h2>
-    <p>The AI Disruptors Fund simulates a modern thematic ETF tracking cutting-edge firms driving artificial intelligence across industries. It was launched in January 2024 with six main holdings and monthly rebalancing based on price momentum and market trends.</p>
-  </section>
+  // --- Initialize Charts ---
+  let pricesChart, returnsChart, cumulativeChart;
 
-  <script>
-    const tabs = document.querySelectorAll('.tab-btn');
-    const sections = document.querySelectorAll('section');
-
-    tabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabs.forEach(b => b.classList.remove('active'));
-        sections.forEach(s => s.classList.remove('active'));
-
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    const ctx = document.getElementById('performanceChart').getContext('2d');
-    const chart = new Chart(ctx, {
+  function initCharts() {
+    const ctxPrices = document.getElementById('pricesChart').getContext('2d');
+    pricesChart = new Chart(ctxPrices, {
       type: 'line',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-        datasets: [{
-          label: 'Fund Value ($)',
-          data: [100, 108, 112, 117, 125, 133, 138, 145],
-          borderWidth: 2,
-          fill: false,
-          borderColor: '#007bff'
-        }]
+        labels: dates.map(formatDate),
+        datasets: createDatasets(prices)
       },
       options: {
         responsive: true,
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
         plugins: {
-          legend: { display: true },
+          legend: {position: 'top'},
+          title: {
+            display: true,
+            text: 'Monthly Prices ($)'
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => `$${ctx.parsed.y.toFixed(2)}`
+            }
+          }
         },
         scales: {
           y: {
+            beginAtZero: false,
             ticks: {
               callback: val => `$${val}`
+            },
+            title: {
+              display: true,
+              text: 'Price in USD'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Date'
             }
           }
         }
       }
     });
-  </script>
+
+    const ctxReturns = document.getElementById('returnsChart').getContext('2d');
+    returnsChart = new Chart(ctxReturns, {
+      type: 'line',
+      data: {
+        labels: dates.slice(1).map(formatDate), // monthly returns start from 2nd date
+        datasets: createDatasets(monthlyReturns)
+      },
+      options: {
+        responsive: true,
+        interaction: {mode: 'nearest', intersect: false},
+        plugins: {
+          legend: {position: 'top'},
+          title: {
+            display: true,
+            text: 'Monthly Returns (%)'
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${(ctx.parsed.y * 100).toFixed(2)}%`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            ticks: {
+              callback: val => `${(val * 100).toFixed(0)}%`
+            },
+            title: {
+              display: true,
+              text: 'Return %'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          }
+        }
+      }
+    });
+
+    const ctxCumulative = document.getElementById('cumulativeChart').getContext('2d');
+    cumulativeChart = new Chart(ctxCumulative, {
+      type: 'line',
+      data: {
+        labels: dates.slice(1).map(formatDate),
+        datasets: createDatasets(cumulativeReturns)
+      },
+      options: {
+        responsive: true,
+        interaction: {mode: 'nearest', intersect: false},
+        plugins: {
+          legend: {position: 'top'},
+          title: {
+            display: true,
+            text: 'Cumulative Returns (Indexed)'
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.parsed.y.toFixed(3)
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            title: {
+              display: true,
+              text: 'Index Value'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Fill Rebalancing Table
+  function populateRebalancingTable() {
+    const tbody = document.getElementById('rebalancingTableBody');
+    tbody.innerHTML = '';
+    rebalancingLog.forEach(entry => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${new Date(entry.date).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'})}</td>
+        <td>$${Number(entry.preValue).toLocaleString()}</td>
+        <td><code>${entry.weights.replace(/'/g, '"')}</code></td>
+        <td>${entry.rationale}</td>
+        <td>$${Number(entry.postValue).toLocaleString()}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Tab switching logic
+  const tabs = document.querySelectorAll('.tab-btn');
+  const sections = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active states
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      sections.forEach(sec => sec.hidden = true);
+
+      // Activate clicked tab and section
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.getElementById(tab.dataset.tab).hidden = false;
+    });
+  });
+
+  // Initialize
+  window.onload = () => {
+    initCharts();
+    populateRebalancingTable();
+  };
+</script>
 </body>
 </html>
